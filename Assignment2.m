@@ -45,11 +45,34 @@ ylabel('Pr(d) in dBm');
 xlabel('d in km');
 grid on;
 hold on;
-semilogx(x,pr_dbm2(d),':');
+semilogx(x,pr_dbm2(d));
 hold on;
-semilogx(x,pr_dbm3(d),'--');
+semilogx(x,pr_dbm3(d));
 hold on
-semilogx(x,pr_dbm4,'.');
+semilogx(x,pr_dbm4);
 hold on
-semilogx(x,pr_dbm5,'+');
+semilogx(x,pr_dbm5);
 hold off;
+legend('Free Space', 'n = 3', 'n = 4','Two Ray','Hata Model');
+%4.24
+%Aproximate 
+num1 = pt*gt*gr*(ht^2)*(hr^2); 
+denum1 = (d).^4; 
+pr=num1./denum1; 
+pr_dbm6 = 10*log10(pr/10^-3);
+%exact
+num2 = (pt*gt*gr*(lamda.^2));
+denum2(d) = ((4*pi).^2)*(d.^2);
+mult2 = 4*(sin(theta/2).^2);
+pr_dbm7 =10*log10(((num2./denum2(d)).*mult2)./10^-3);
+%plot 4.24
+%plot 
+  figure(2); 
+  plot(x,pr_dbm6);
+  title ('Recieved power (approximate&Exact)'); 
+  ylabel('Pr(d)(dBm)'); 
+  xlabel('distance (km)');
+  hold on; 
+  grid on; 
+  plot(x,pr_dbm7);
+  legend('Exact', 'Approximate')
