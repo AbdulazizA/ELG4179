@@ -39,38 +39,17 @@ pr_dbm5= (-30) - (L_50(d)-L1km_50);
 
 %plot 4.23
 figure(1);
-plot(x,pr_dbm(d));
+semilogx(x,pr_dbm(d));
 title ('Recieved power of different models');
 ylabel('Pr(d) in dBm');
 xlabel('d in km');
 grid on;
 hold on;
-plot(x,pr_dbm2(d),':');
+semilogx(x,pr_dbm2(d),':');
 hold on;
-plot(x,pr_dbm3(d),'--');
+semilogx(x,pr_dbm3(d),'--');
 hold on
-plot(x,pr_dbm4,'.');
+semilogx(x,pr_dbm4,'.');
 hold on
-plot(x,pr_dbm5,'+');
+semilogx(x,pr_dbm5,'+');
 hold off;
-
-% 4.24
-%Aproximate
-m = 1000:1:20000;
-d2 = 1000:1:20000;
-num1 = pt*gt*gr*(ht^2)*(hr^2);
-denum1 = (d2).^4;
-pr=num1./denum1;
-pr_dbm6 = 10*log10(pr/10^-3);
-%exact
-E0 = (ht*hr*pt*gt*gr)./((d2).^2.*(4*pi));
-num2 = (E0*d0).*sqrt(2-2.*cos(theta));
-denum2 = d2;
-E_tot = num2/denum2;
-E_tot_dbm = 10*log10(E_tot/10^-3);
-%plot
-figure(2);
-plot(m,pr_dbm6);
-hold on;
-plot(m,E_tot_dbm,'-');
-grid on;
